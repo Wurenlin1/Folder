@@ -12,7 +12,9 @@ document.querySelectorAll(".sort-options a").forEach((option) => {
 });
 document.getElementById("removeDuplicatesBtn").addEventListener("click", removeDuplicates);
 document.getElementById("keepDuplicatesBtn").addEventListener("click", keepDuplicates);
-document.getElementById("createSubfoldersBtn").addEventListener("click", createSubfolders);
+document.getElementById("createSubfolderBtn").addEventListener("click", createSubfolder);
+document.getElementById("deleteSelectedBtn").addEventListener("click", deleteSelected);
+document.getElementById("clearAllBtn").addEventListener("click", clearAll);
 
 let uploadedData = [];
 let folderNames = [];
@@ -218,29 +220,53 @@ function createFolders() {
   document.getElementById("output").innerHTML = output;
 }
 
-function createSubfolders() {
-  const folderItems = document.querySelectorAll("#folderPreview .folder-item");
-  const selectedFolders = [];
-
-  folderItems.forEach((item) => {
-    const checkbox = item.querySelector("input[type='checkbox']");
-    if (checkbox.checked) {
-      selectedFolders.push(checkbox.value);
-    }
-  });
-
-  let output = "";
-  if (selectedFolders.length > 0) {
-    selectedFolders.forEach((name) => {
-      output += `<p>Created subfolders for <strong>${name}</strong>:</p>`;
-      output += `<ul>`;
-      output += `<li>Subfolder 1</li>`;
-      output += `<li>Subfolder 2</li>`;
-      output += `</ul>`;
-    });
-  } else {
-    output = "<p>Please select at least one folder to create subfolders.</p>";
+function createSubfolder() {
+  const subfolderName = document.getElementById("subfolderNameInput").value.trim();
+  if (!subfolderName) {
+    alert("Please enter a subfolder name.");
+    return;
   }
 
-  document.getElementById("output").innerHTML = output;
+  const selectedFolders = document.querySelectorAll("#folderPreview input[type='checkbox']:checked");
+  if (selectedFolders.length === 0) {
+    alert("Please select a folder to add a subfolder.");
+    return;
+  }
+
+  selectedFolders.forEach((checkbox) => {
+    const folderName = checkbox.value;
+    const subfolderItem = document.createElement("div");
+    subfolderItem.className = "subfolder";
+
+    const subfolderCheckbox = document.createElement("input");
+    subfolderCheckbox.type = "checkbox";
+    subfolderCheckbox.value = `${folderName}/${subfolderName}`;
+
+    const subfolderLabel = document.createElement("label");
+    subfolderLabel.textContent = `↳ ${subfolderName}`;
+
+    subfolderItem.appendChild(subfolderCheckbox);
+    subfolderItem.appendChild(subfolderLabel);
+    checkbox.parentElement.appendChild(subfolderItem);
+  });
+
+  document.getElementById("subfolderNameInput").value = ""; // Clear input
+}
+
+function deleteSelected() {
+  const selectedItems = document.querySelectorAll("#folderPreview input[type='checkbox']:checked");
+  selectedItems.forEach((item) => {
+    item.parentElement.remove(); // Remove the folder/subfolder
+  });
+
+  // Update folderNames and textarea
+  folderNames = Array.from(document.querySelectorAll("#folderPreview .folder-item label")).map((label) => label.textContent.replace(/^\d+\.\s/, ""));
+  document.getElementById("namesInput").value = folderNames.join("\n");
+  updateFolderPreview();
+}
+
+function clearAll() {
+  document.getElementById("namesInput").value = "";
+  folderNames = [];
+  renderFolderPreview();
 }

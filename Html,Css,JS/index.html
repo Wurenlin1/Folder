@@ -41,7 +41,7 @@
             <input type="checkbox" id="splitByNewLine"> Split by new lines instead of commas
           </label>
           <button id="createFoldersBtn">Create Folders</button>
-          <button id="createSubfoldersBtn">Create Subfolders</button>
+          <button id="clearAllBtn">Clear All</button>
           <p id="folderCount">Folders to be created: 0</p>
         </div>
         <div class="preview-box">
@@ -57,8 +57,13 @@
                 <a href="#" data-sort="desc">Z-A (Highest to Lowest)</a>
               </div>
             </div>
+            <button id="deleteSelectedBtn">Delete Selected</button>
           </div>
           <div id="folderPreview"></div>
+          <div class="subfolder-box">
+            <input type="text" id="subfolderNameInput" placeholder="Enter subfolder name">
+            <button id="createSubfolderBtn">Create Subfolder</button>
+          </div>
         </div>
       </div>
     </div>
