@@ -179,7 +179,7 @@ body {
     color: #555;
   }
 
-  /* Modal Styles */
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -244,4 +244,24 @@ body {
   
   #keepDuplicatesBtn:hover {
     background-color: #5a6268;
+  }
+  
+  /* Select All Button Checkbox */
+  #selectAllBtn {
+    position: relative;
+  }
+  
+  #selectAllCheckbox {
+    margin-right: 5px;
+  }
+  
+  /* Create Subfolders Button */
+  #createSubfoldersBtn {
+    background-color: #28a745;
+    color: white;
+    margin-left: 10px;
+  }
+  
+  #createSubfoldersBtn:hover {
+    background-color: #218838;
   }
