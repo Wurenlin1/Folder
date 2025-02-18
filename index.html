@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folder Creator</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Include xlsx library for Excel file parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <!-- Include PapaParse for CSV file parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Folder Creator</h1>
+
+    <!-- File Upload Section -->
+    <div class="upload-section">
+      <label for="fileInput">Upload Excel or CSV File:</label>
+      <input type="file" id="fileInput" accept=".xlsx, .csv">
+    </div>
+
+    <!-- Preview Section -->
+    <div id="previewSection" class="hidden">
+      <h2>Preview Uploaded File</h2>
+      <div id="previewTableContainer"></div>
+      <label for="startRow">Start Row:</label>
+      <input type="number" id="startRow" min="1" value="1">
+      <label for="endRow">End Row:</label>
+      <input type="number" id="endRow" min="1" value="1">
+      <button id="confirmSelectionBtn">Confirm Selection</button>
+    </div>
+
+    <!-- Manual Input Section -->
+    <div id="manualInputSection">
+      <div class="input-preview-container">
+        <div class="input-box">
+          <p>Enter names separated by commas or new lines:</p>
+          <textarea id="namesInput" placeholder="e.g., Alice, Bob, Charlie"></textarea>
+          <label>
+            <input type="checkbox" id="splitByNewLine"> Split by new lines instead of commas
+          </label>
+          <button id="createFoldersBtn">Create Folders</button>
+          <p id="folderCount">Folders to be created: 0</p>
+        </div>
+        <div class="preview-box">
+          <p>Folder Names Preview:</p>
+          <div class="preview-controls">
+            <button id="selectAllBtn">Select All</button>
+            <div class="sort-dropdown">
+              <button id="sortBtn">Sort</button>
+              <div class="sort-options">
+                <a href="#" data-sort="asc">A-Z (Lowest to Highest)</a>
+                <a href="#" data-sort="desc">Z-A (Highest to Lowest)</a>
+              </div>
+            </div>
+          </div>
+          <div id="folderPreview"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Output Section -->
+    <div id="output"></div>
+  </div>
+
+  <!-- Popup Modal for Duplicates -->
+  <div id="duplicateModal" class="modal">
+    <div class="modal-content">
+      <h2>Duplicate Folder Names Found</h2>
+      <p>The following folder names are duplicated:</p>
+      <ul id="duplicateList"></ul>
+      <p>Do you want to remove duplicates?</p>
+      <button id="removeDuplicatesBtn">Yes, Remove Duplicates</button>
+      <button id="keepDuplicatesBtn">No, Keep Duplicates</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
