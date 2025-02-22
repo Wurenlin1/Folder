@@ -1,3 +1,4 @@
+// Event Listeners
 document.getElementById("fileInput").addEventListener("change", handleFileUpload);
 document.getElementById("confirmColumnBtn").addEventListener("click", confirmColumn);
 document.getElementById("confirmSelectionBtn").addEventListener("click", confirmSelection);
@@ -17,10 +18,12 @@ document.getElementById("createSubfolderBtn").addEventListener("click", createSu
 document.getElementById("deleteSelectedBtn").addEventListener("click", deleteSelected);
 document.getElementById("clearAllBtn").addEventListener("click", clearAll);
 
+// Global Variables
 let uploadedData = [];
 let folderNames = [];
 let selectedColumnIndex = null;
 
+// File Upload Handler
 function handleFileUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
@@ -36,6 +39,7 @@ function handleFileUpload(event) {
   }
 }
 
+// Parse Excel File
 function parseExcelFile(file) {
   const reader = new FileReader();
   reader.onload = function (e) {
@@ -49,6 +53,7 @@ function parseExcelFile(file) {
   reader.readAsArrayBuffer(file);
 }
 
+// Parse CSV File
 function parseCSVFile(file) {
   Papa.parse(file, {
     header: false,
@@ -60,6 +65,7 @@ function parseCSVFile(file) {
   });
 }
 
+// Show Column Selection Dropdown
 function showColumnSelection(headerRow) {
   const columnDropdown = document.getElementById("columnDropdown");
   columnDropdown.innerHTML = "";
@@ -74,6 +80,7 @@ function showColumnSelection(headerRow) {
   document.getElementById("columnSelection").classList.remove("hidden");
 }
 
+// Confirm Selected Column
 function confirmColumn() {
   const columnDropdown = document.getElementById("columnDropdown");
   selectedColumnIndex = parseInt(columnDropdown.value, 10);
@@ -83,6 +90,7 @@ function confirmColumn() {
   showPreview(uploadedData);
 }
 
+// Show Data Preview
 function showPreview(data) {
   const previewTableContainer = document.getElementById("previewTableContainer");
   previewTableContainer.innerHTML = "";
@@ -127,6 +135,7 @@ function showPreview(data) {
   previewTableContainer.appendChild(table);
 }
 
+// Confirm Row Selection
 function confirmSelection() {
   const startRow = parseInt(document.getElementById("startRow").value, 10) - 1;
   const endRow = parseInt(document.getElementById("endRow").value, 10);
@@ -139,8 +148,7 @@ function confirmSelection() {
   document.getElementById("previewSection").classList.add("hidden");
 }
 
-// Rest of the code remains the same...
-
+// Update Folder Preview
 function updateFolderPreview() {
   const namesInput = document.getElementById("namesInput").value;
   const splitByNewLine = document.getElementById("splitByNewLine").checked;
@@ -152,6 +160,7 @@ function updateFolderPreview() {
   checkForDuplicates();
 }
 
+// Check for Duplicates
 function checkForDuplicates() {
   const duplicates = findDuplicates(folderNames);
   if (duplicates.length > 0) {
@@ -161,6 +170,7 @@ function checkForDuplicates() {
   }
 }
 
+// Find Duplicates
 function findDuplicates(names) {
   const seen = new Set();
   const duplicates = new Set();
@@ -174,6 +184,7 @@ function findDuplicates(names) {
   return Array.from(duplicates);
 }
 
+// Show Duplicate Modal
 function showDuplicateModal(duplicates) {
   const duplicateList = document.getElementById("duplicateList");
   duplicateList.innerHTML = duplicates.map((name) => `<li>${name}</li>`).join("");
@@ -182,6 +193,7 @@ function showDuplicateModal(duplicates) {
   document.getElementById("duplicateModal").style.display = "flex";
 }
 
+// Remove Duplicates
 function removeDuplicates() {
   folderNames = [...new Set(folderNames)]; // Remove duplicates
   document.getElementById("namesInput").value = folderNames.join("\n"); // Update textarea
@@ -189,11 +201,13 @@ function removeDuplicates() {
   renderFolderPreview();
 }
 
+// Keep Duplicates
 function keepDuplicates() {
   document.getElementById("duplicateModal").style.display = "none";
   renderFolderPreview();
 }
 
+// Render Folder Preview
 function renderFolderPreview() {
   const folderPreview = document.getElementById("folderPreview");
   folderPreview.innerHTML = "";
@@ -219,6 +233,7 @@ function renderFolderPreview() {
   document.getElementById("folderCount").textContent = `Folders to be created: ${folderNames.length}`;
 }
 
+// Toggle Select All
 function toggleSelectAll() {
   const checkboxes = document.querySelectorAll("#folderPreview input[type='checkbox']");
   const selectAllCheckbox = document.getElementById("selectAllCheckbox");
@@ -227,6 +242,7 @@ function toggleSelectAll() {
   });
 }
 
+// Sort Folders
 function sortFolders(order) {
   if (order === "asc") {
     folderNames.sort((a, b) => a.localeCompare(b));
@@ -236,6 +252,7 @@ function sortFolders(order) {
   renderFolderPreview();
 }
 
+// Create Folders
 function createFolders() {
   const folderItems = document.querySelectorAll("#folderPreview .folder-item");
   const selectedFolders = [];
@@ -259,6 +276,7 @@ function createFolders() {
   document.getElementById("output").innerHTML = output;
 }
 
+// Create Subfolder
 function createSubfolder() {
   const subfolderName = document.getElementById("subfolderNameInput").value.trim();
   if (!subfolderName) {
@@ -299,6 +317,7 @@ function createSubfolder() {
   document.getElementById("subfolderNameInput").value = ""; // Clear input
 }
 
+// Delete Selected Folders/Subfolders
 function deleteSelected() {
   const selectedItems = document.querySelectorAll("#folderPreview input[type='checkbox']:checked");
   selectedItems.forEach((item) => {
@@ -311,6 +330,7 @@ function deleteSelected() {
   updateFolderPreview();
 }
 
+// Clear All
 function clearAll() {
   document.getElementById("namesInput").value = "";
   folderNames = [];

@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f9;
@@ -25,14 +26,41 @@ h1 {
   color: #333;
 }
 
-.upload-section {
-  margin-bottom: 20px;
-}
-
 .hidden {
   display: none;
 }
 
+/* File Upload Section */
+.upload-section {
+  margin-bottom: 20px;
+}
+
+#columnSelection {
+  margin-top: 10px;
+}
+
+#columnDropdown {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+#confirmColumnBtn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#confirmColumnBtn:hover {
+  background-color: #218838;
+}
+
+/* Preview Section */
 #previewTableContainer {
   max-height: 300px;
   overflow-y: auto;
@@ -58,6 +86,7 @@ th {
   background-color: #f2f2f2;
 }
 
+/* Input and Preview Container */
 .input-preview-container {
   display: flex;
   gap: 20px;
@@ -73,13 +102,14 @@ th {
 }
 
 textarea {
-  width:90%;
+  width: 90%;
   height: 150px;
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  resize: vertical; /* Allow vertical resizing */
 }
 
 label {
@@ -97,6 +127,7 @@ input[type="number"] {
   border-radius: 4px;
 }
 
+/* Buttons */
 button {
   background-color: #007bff;
   color: white;
@@ -106,18 +137,44 @@ button {
   cursor: pointer;
   font-size: 16px;
   margin-right: 10px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #0056b3;
 }
 
-#folderCount {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #555;
+#createSubfolderBtn {
+  background-color: #28a745;
+  color: white;
+  margin-left: 10px;
 }
 
+#createSubfolderBtn:hover {
+  background-color: #218838;
+}
+
+#deleteSelectedBtn {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 10px;
+}
+
+#deleteSelectedBtn:hover {
+  background-color: #c82333;
+}
+
+#clearAllBtn {
+  background-color: #ffc107;
+  color: black;
+  margin-left: 10px;
+}
+
+#clearAllBtn:hover {
+  background-color: #e0a800;
+}
+
+/* Folder Preview */
 #folderPreview {
   max-height: 200px;
   overflow-y: auto;
@@ -125,17 +182,35 @@ button:hover {
   border-radius: 4px;
   padding: 10px;
   background-color: white;
-  text-align: left; /* Align folder names to the left */
+  text-align: left;
 }
 
 .folder-item {
-  margin-left: 0; /* Remove indentation for main folders */
+  margin-left: 0;
 }
 
 .subfolder {
-  margin-left: 20px; /* Indent subfolders */
+  margin-left: 20px;
 }
 
+/* Scrollbar Styles */
+#folderPreview::-webkit-scrollbar,
+#previewTableContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+#folderPreview::-webkit-scrollbar-thumb,
+#previewTableContainer::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+#folderPreview::-webkit-scrollbar-track,
+#previewTableContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Preview Controls */
 .preview-controls {
   display: flex;
   justify-content: space-between;
@@ -172,55 +247,6 @@ button:hover {
   display: block;
 }
 
-#selectAllBtn {
-  position: relative;
-}
-
-#selectAllCheckbox {
-  margin-right: 5px;
-}
-
-#createSubfolderBtn {
-  background-color: #28a745;
-  color: white;
-  margin-left: 10px;
-}
-
-#createSubfolderBtn:hover {
-  background-color: #218838;
-}
-
-#deleteSelectedBtn {
-  background-color: #dc3545;
-  color: white;
-  margin-left: 10px;
-}
-
-#deleteSelectedBtn:hover {
-  background-color: #c82333;
-}
-
-.subfolder-box {
-  margin-top: 10px;
-}
-
-.subfolder-box input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-}
-
-#clearAllBtn {
-  background-color: #ffc107;
-  color: black;
-  margin-left: 10px;
-}
-
-#clearAllBtn:hover {
-  background-color: #e0a800;
-}
-
 /* Modal Styles */
 .modal {
   display: none;
@@ -233,6 +259,7 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
+  transition: opacity 0.3s ease;
 }
 
 .modal-content {
@@ -241,8 +268,8 @@ button:hover {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 400px;
-  max-height: 80vh; /* Set maximum height */
-  overflow-y: auto; /* Enable scrolling */
+  max-height: 80vh;
+  overflow-y: auto;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -258,8 +285,8 @@ button:hover {
   list-style-type: none;
   padding: 0;
   margin: 10px 0;
-  flex-grow: 1; /* Allow the list to grow and scroll */
-  overflow-y: auto; /* Enable scrolling for the list */
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .modal-content ul li {
@@ -268,7 +295,7 @@ button:hover {
 }
 
 .modal-content .modal-buttons {
-  margin-top: 20px; /* Ensure buttons are always visible */
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -300,66 +327,17 @@ button:hover {
   background-color: #5a6268;
 }
 
-/* Column Selection Dropdown */
-#columnSelection {
-  margin-top: 10px;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .input-preview-container {
+    flex-direction: column;
+  }
 
-#columnDropdown {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-}
+  .input-box, .preview-box {
+    width: 100%;
+  }
 
-#confirmColumnBtn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#confirmColumnBtn:hover {
-  background-color: #218838;
-}
-
-/* Numbered Duplicate List */
-#duplicateList {
-  counter-reset: duplicate-counter; /* Initialize counter */
-}
-
-#duplicateList li {
-  counter-increment: duplicate-counter; /* Increment counter */
-}
-
-#duplicateList li::before {
-  content: counter(duplicate-counter) ". "; /* Add number before each item */
-  margin-right: 10px;
-  color: #555;
-}
-
-/* Numbered Preview Table */
-#previewTableContainer table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-#previewTableContainer th,
-#previewTableContainer td {
-  padding: 8px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-#previewTableContainer th {
-  background-color: #f2f2f2;
-}
-
-#previewTableContainer td:first-child {
-  width: 50px; /* Fixed width for the numbered column */
-  text-align: center;
-  font-weight: bold;
+  textarea {
+    width: 100%;
+  }
 }
