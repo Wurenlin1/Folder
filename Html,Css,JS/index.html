@@ -18,6 +18,11 @@
     <div class="upload-section">
       <label for="fileInput">Upload Excel or CSV File:</label>
       <input type="file" id="fileInput" accept=".xlsx, .csv">
+      <div id="columnSelection" class="hidden">
+        <label for="columnDropdown">Select Column for Folder Names:</label>
+        <select id="columnDropdown"></select>
+        <button id="confirmColumnBtn">Confirm Column</button>
+      </div>
     </div>
 
     <!-- Preview Section -->
@@ -78,9 +83,10 @@
       <h2>Duplicate Folder Names Found</h2>
       <p>The following folder names are duplicated:</p>
       <ul id="duplicateList"></ul>
-      <p>Do you want to remove duplicates?</p>
-      <button id="removeDuplicatesBtn">Yes, Remove Duplicates</button>
-      <button id="keepDuplicatesBtn">No, Keep Duplicates</button>
+      <div class="modal-buttons">
+        <button id="removeDuplicatesBtn">Yes, Remove Duplicates</button>
+        <button id="keepDuplicatesBtn">No, Keep Duplicates</button>
+      </div>
     </div>
   </div>
 

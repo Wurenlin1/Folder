@@ -1,183 +1,225 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 1200px;
-    text-align: center;
-  }
-  
-  h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .upload-section {
-    margin-bottom: 20px;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  #previewTableContainer {
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-  
-  th, td {
-    padding: 8px;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  .input-preview-container {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .input-box, .preview-box {
-    flex: 1;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  textarea {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  input[type="number"] {
-    width: 100px;
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 10px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  #folderCount {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  #folderPreview {
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    background-color: white;
-  }
-  
-  .folder-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  
-  .folder-item input[type="checkbox"] {
-    margin-right: 10px;
-  }
-  
-  .preview-controls {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .sort-dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .sort-options {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-  }
-  
-  .sort-options a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .sort-options a:hover {
-    background-color: #f2f2f2;
-  }
-  
-  .sort-dropdown:hover .sort-options {
-    display: block;
-  }
-  
-  #output {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #555;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.upload-section {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#previewTableContainer {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.input-preview-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.input-box, .preview-box {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+textarea {
+  width:90%;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+input[type="number"] {
+  width: 100px;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#folderCount {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+#folderPreview {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: white;
+  text-align: left; /* Align folder names to the left */
+}
+
+.folder-item {
+  margin-left: 0; /* Remove indentation for main folders */
+}
+
+.subfolder {
+  margin-left: 20px; /* Indent subfolders */
+}
+
+.preview-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sort-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.sort-options {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.sort-options a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+}
+
+.sort-options a:hover {
+  background-color: #f2f2f2;
+}
+
+.sort-dropdown:hover .sort-options {
+  display: block;
+}
+
+#selectAllBtn {
+  position: relative;
+}
+
+#selectAllCheckbox {
+  margin-right: 5px;
+}
+
+#createSubfolderBtn {
+  background-color: #28a745;
+  color: white;
+  margin-left: 10px;
+}
+
+#createSubfolderBtn:hover {
+  background-color: #218838;
+}
+
+#deleteSelectedBtn {
+  background-color: #dc3545;
+  color: white;
+  margin-left: 10px;
+}
+
+#deleteSelectedBtn:hover {
+  background-color: #c82333;
+}
+
+.subfolder-box {
+  margin-top: 10px;
+}
+
+.subfolder-box input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+#clearAllBtn {
+  background-color: #ffc107;
+  color: black;
+  margin-left: 10px;
+}
+
+#clearAllBtn:hover {
+  background-color: #e0a800;
+}
 
 /* Modal Styles */
 .modal {
@@ -199,7 +241,11 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 400px;
+  max-height: 80vh; /* Set maximum height */
+  overflow-y: auto; /* Enable scrolling */
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-content h2 {
@@ -212,6 +258,8 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 10px 0;
+  flex-grow: 1; /* Allow the list to grow and scroll */
+  overflow-y: auto; /* Enable scrolling for the list */
 }
 
 .modal-content ul li {
@@ -219,8 +267,14 @@ body {
   color: #555;
 }
 
+.modal-content .modal-buttons {
+  margin-top: 20px; /* Ensure buttons are always visible */
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 .modal-content button {
-  margin: 10px 5px;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -246,65 +300,66 @@ body {
   background-color: #5a6268;
 }
 
-/* Select All Button Checkbox */
-#selectAllBtn {
-  position: relative;
-}
-
-#selectAllCheckbox {
-  margin-right: 5px;
-}
-
-/* Create Subfolders Button */
-#createSubfolderBtn {
-  background-color: #28a745;
-  color: white;
-  margin-left: 10px;
-}
-
-#createSubfolderBtn:hover {
-  background-color: #218838;
-}
-
-/* Delete Selected Button */
-#deleteSelectedBtn {
-  background-color: #dc3545;
-  color: white;
-  margin-left: 10px;
-}
-
-#deleteSelectedBtn:hover {
-  background-color: #c82333;
-}
-
-/* Subfolder Box */
-.subfolder-box {
+/* Column Selection Dropdown */
+#columnSelection {
   margin-top: 10px;
 }
 
-.subfolder-box input {
+#columnDropdown {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 10px;
 }
 
-/* Indented Subfolders */
-.folder-item {
-  margin-left: 20px;
+#confirmColumnBtn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.subfolder {
-  margin-left: 40px;
+#confirmColumnBtn:hover {
+  background-color: #218838;
 }
 
-/* Clear All Button */
-#clearAllBtn {
-  background-color: #ffc107;
-  color: black;
-  margin-left: 10px;
+/* Numbered Duplicate List */
+#duplicateList {
+  counter-reset: duplicate-counter; /* Initialize counter */
 }
 
-#clearAllBtn:hover {
-  background-color: #e0a800;
+#duplicateList li {
+  counter-increment: duplicate-counter; /* Increment counter */
+}
+
+#duplicateList li::before {
+  content: counter(duplicate-counter) ". "; /* Add number before each item */
+  margin-right: 10px;
+  color: #555;
+}
+
+/* Numbered Preview Table */
+#previewTableContainer table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#previewTableContainer th,
+#previewTableContainer td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+#previewTableContainer th {
+  background-color: #f2f2f2;
+}
+
+#previewTableContainer td:first-child {
+  width: 50px; /* Fixed width for the numbered column */
+  text-align: center;
+  font-weight: bold;
 }

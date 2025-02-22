@@ -1,4 +1,5 @@
 document.getElementById("fileInput").addEventListener("change", handleFileUpload);
+document.getElementById("confirmColumnBtn").addEventListener("click", confirmColumn);
 document.getElementById("confirmSelectionBtn").addEventListener("click", confirmSelection);
 document.getElementById("namesInput").addEventListener("input", updateFolderPreview);
 document.getElementById("splitByNewLine").addEventListener("change", updateFolderPreview);
@@ -18,6 +19,7 @@ document.getElementById("clearAllBtn").addEventListener("click", clearAll);
 
 let uploadedData = [];
 let folderNames = [];
+let selectedColumnIndex = null;
 
 function handleFileUpload(event) {
   const file = event.target.files[0];
@@ -42,7 +44,7 @@ function parseExcelFile(file) {
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
     uploadedData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-    showPreview(uploadedData);
+    showColumnSelection(uploadedData[0]); // Show column selection dropdown
   };
   reader.readAsArrayBuffer(file);
 }
@@ -53,9 +55,32 @@ function parseCSVFile(file) {
     dynamicTyping: true,
     complete: function (results) {
       uploadedData = results.data;
-      showPreview(uploadedData);
+      showColumnSelection(uploadedData[0]); // Show column selection dropdown
     },
   });
+}
+
+function showColumnSelection(headerRow) {
+  const columnDropdown = document.getElementById("columnDropdown");
+  columnDropdown.innerHTML = "";
+
+  headerRow.forEach((column, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = column || `Column ${index + 1}`;
+    columnDropdown.appendChild(option);
+  });
+
+  document.getElementById("columnSelection").classList.remove("hidden");
+}
+
+function confirmColumn() {
+  const columnDropdown = document.getElementById("columnDropdown");
+  selectedColumnIndex = parseInt(columnDropdown.value, 10);
+
+  // Show preview section
+  document.getElementById("previewSection").classList.remove("hidden");
+  showPreview(uploadedData);
 }
 
 function showPreview(data) {
@@ -68,6 +93,10 @@ function showPreview(data) {
 
   // Create table header
   const headerRow = document.createElement("tr");
+  const headerNumber = document.createElement("th");
+  headerNumber.textContent = "#";
+  headerRow.appendChild(headerNumber);
+
   data[0].forEach((cell) => {
     const th = document.createElement("th");
     th.textContent = cell;
@@ -76,9 +105,16 @@ function showPreview(data) {
   thead.appendChild(headerRow);
   table.appendChild(thead);
 
-  // Create table body
-  data.slice(1).forEach((row) => {
+  // Create table body with numbering
+  data.slice(1).forEach((row, index) => {
     const tr = document.createElement("tr");
+
+    // Add row number
+    const rowNumber = document.createElement("td");
+    rowNumber.textContent = index + 1;
+    tr.appendChild(rowNumber);
+
+    // Add row data
     row.forEach((cell) => {
       const td = document.createElement("td");
       td.textContent = cell;
@@ -89,7 +125,6 @@ function showPreview(data) {
   table.appendChild(tbody);
 
   previewTableContainer.appendChild(table);
-  document.getElementById("previewSection").classList.remove("hidden");
 }
 
 function confirmSelection() {
@@ -97,12 +132,14 @@ function confirmSelection() {
   const endRow = parseInt(document.getElementById("endRow").value, 10);
 
   const selectedData = uploadedData.slice(startRow, endRow);
-  folderNames = selectedData.map((row) => row[0]); // Assuming folder names are in the first column
+  folderNames = selectedData.map((row) => row[selectedColumnIndex]); // Use selected column
 
   document.getElementById("namesInput").value = folderNames.join("\n");
   updateFolderPreview();
   document.getElementById("previewSection").classList.add("hidden");
 }
+
+// Rest of the code remains the same...
 
 function updateFolderPreview() {
   const namesInput = document.getElementById("namesInput").value;
@@ -140,6 +177,8 @@ function findDuplicates(names) {
 function showDuplicateModal(duplicates) {
   const duplicateList = document.getElementById("duplicateList");
   duplicateList.innerHTML = duplicates.map((name) => `<li>${name}</li>`).join("");
+
+  // Show the modal
   document.getElementById("duplicateModal").style.display = "flex";
 }
 
@@ -170,7 +209,7 @@ function renderFolderPreview() {
 
     const label = document.createElement("label");
     label.htmlFor = `folder-${index}`;
-    label.textContent = `${index + 1}. ${name}`;
+    label.textContent = `${index + 1}. ${name}`; // Main folder uses "."
 
     folderItem.appendChild(checkbox);
     folderItem.appendChild(label);
@@ -234,20 +273,27 @@ function createSubfolder() {
   }
 
   selectedFolders.forEach((checkbox) => {
-    const folderName = checkbox.value;
+    const folderItem = checkbox.parentElement;
+    const folderLabel = folderItem.querySelector("label");
+    const folderNumber = folderLabel.textContent.split(" ")[0]; // Get the main folder number (e.g., "1.")
+
+    // Create subfolder item
     const subfolderItem = document.createElement("div");
     subfolderItem.className = "subfolder";
 
+    // Replace "." with "-" for subfolders
+    const subfolderNumber = folderNumber.replace(".", "-");
+
     const subfolderCheckbox = document.createElement("input");
     subfolderCheckbox.type = "checkbox";
-    subfolderCheckbox.value = `${folderName}/${subfolderName}`;
+    subfolderCheckbox.value = `${folderLabel.textContent}/${subfolderName}`;
 
     const subfolderLabel = document.createElement("label");
-    subfolderLabel.textContent = `↳ ${subfolderName}`;
+    subfolderLabel.textContent = `${subfolderNumber} ${subfolderName}`; // Subfolder uses "-"
 
     subfolderItem.appendChild(subfolderCheckbox);
     subfolderItem.appendChild(subfolderLabel);
-    checkbox.parentElement.appendChild(subfolderItem);
+    folderItem.appendChild(subfolderItem);
   });
 
   document.getElementById("subfolderNameInput").value = ""; // Clear input
